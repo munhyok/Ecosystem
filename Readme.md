@@ -1,122 +1,148 @@
-# #EcoSystem
+#Project EcoSystem
 
-프로젝트 시작 일 : 19.12.10
+서론
+한정 된 공간에 지구의 날씨와 비슷한 환경에서 식물 성장 유지가 가능할까?
 
+밖의 날씨를 실시간으로 테라리움 안에서 보여주는 것뿐만 아니라
+밖의 날씨를 이용해 실제 식물을 사용자가 관리하지 않아도 스스로 성장이 가능할 수 있게 해주는 시스템
 
-**Original Idea : Project Oasis (https://github.com/googlecreativelab/project-oasis)**
+식물 참고 : https://brunch.co.kr/@zzanggusis/8
 
-**이 프로젝트는 [Experiments with Google](https://experiments.withgoogle.com/)의 Project oasis에서 영감을 받아 제작되었습니다.**
+구현 범위
 
+광합성, 습도(안개), 비 구현 예정
 
+난제
+가습기 살균 문제 (UV LED로 해결)
+모터 소음
+일회성 정수 필터
 
-## 소개
+Ex) 밖 : 비가온다 -> 테라리움 : 비가 내리듯이 물을 뿌려준다
 
-한정된 공간에 지구의 날씨와 비슷한 환경에서 식물 생장이 가능할까? 라는 생각으로 시작해
 
-사람의 관리 없이 현재 밖의 날씨 정보를 실시간으로 받아와 한정된 공간인 테라리움 안에 인공적인 날씨를 연출시켜 식물 생장이 가능하게 해주는 시스템입니다.
+재료
 
-OpenWeatherMap API를 활용했으며 JSON 형식으로 아두이노에서 정보를 받아옵니다.
+Main Body
+OpenWeather API
+https://kocoafab.cc/tutorial/view/654
+https://randomnerdtutorials.com/esp8266-weather-forecaster/
+https://simple-circuit.com/iot-internet-weather-station-esp8266/
 
-받아 온 정보를 기반으로 하드웨어를 동작시켜 테라리움 내부에도 외부날씨와 동일한 날씨를 연출시켜줍니다.
+아크릴
 
-## 기능
+LED BAR (Plant Grow LED)
 
-#### 식물 광합성
+Arduino Uno
 
-​	광합성이 가능한 생장 LED를 활용해 시간과 연동하여 LED가 리얼타임으로 작동됩니다.
+Bread Board 
 
-#### 습도
+ESP 8266(Wifi) API연결 목적 및 스마트폰 앱 제어의 목적
 
-​	실시간으로 받아온 날씨 데이터에 포함된 습도와 테라리움의 내부 습도 값을 가져와 가습기 모듈을 이용해
+8000
 
-​	테라리움의 내부 습도를 조절합니다.
+Peristaltic pump (튜빙 펌프)
 
-#### 비
 
-​	밖에서 비가 온다면 테라리움 내부에도 비가 내립니다.
+BLDC motor PWM Controller(motor shield)
 
+UV LED (가급적 살균력이 좋은 UV-C LED로..)
+https://ko.aliexpress.com/item/4000174320639.html?pid=808_0008_0131&spm=a2g0n.search-amp.list.4000174320639&aff_trace_key=&aff_platform=msite&m_page_id=3832EogFbAJA5_653QU28-qvzAc0iHLtP7IeENlIcTDqN3jdvwFursYTSOTO_aYFz5DY1583320468439&browser_id=3baf5fa2fa234049b13547afe5965909&is_c=Y
 
+17000 × 2
 
-## 하드웨어
+식물 생장 백색 LED
+http://mitem.gmarket.co.kr/Item?goodsCode=1373556203&jaehuid=200010778
 
-#### 핵심 하드웨어
+13900
 
-**Main Body : Arduino Uno WeMos D1 Wifi Board**
+투명 실리콘 호스
+https://www.navimro.com/p/K07147328?utm_source=google&utm_medium=shopping&gclid=CjwKCAjwwvfrBRBIEiwA2nFiPQf0xMKw1srC8Nocf1DTWpSke222WxwrkYmrNsgloBy5iyF00L8AFRoCD3MQAvD_BwE
 
-**Sub Body : Ardunio Uno**
+6890
 
-// Main Body에 날씨정보를 받아오고 받아온 날씨정보를 토대로 Sub Body에 날씨 코드를 보내줍니다.
+초음파 가습기 모듈
+https://greenteeaaa.tistory.com/m/12?category=675066
 
-Sub Body는 받아온 날씨 코드를 기반으로 하드웨어 모듈을 작동시킵니다. 이 둘의 통신은 UART로 할 예정입니다.
+8000
 
+12V FAN / TIP120(Transistor) 10K 저항
+https://youtu.be/Z-9Mio92w5g
 
+1000
 
-**Peristaltic pump** - Sub Body
+수분 센서
+http://mechasolution.com/shop/goods/goods_view.php?goodsno=543105&category=
 
-// BLDC모터가 내장된 펌프를 이용해 비를 내리게 해줍니다.
+3300
 
+온습도 센서 (DHT22)
+https://front.wemakeprice.com/product/143290911?utm_source=google_ss&utm_medium=cpc&utm_campaign=r_sa&gclid=Cj0KCQjwiILsBRCGARIsAHKQWLOzLKUpIVP3JR3M26q_HYUbXAdJC6P_fPI6Rf8xJAMNDbuGrQkjB9IaAkrdEALw_wcB
+6050
 
+필터 제작
+여과지
+http://itempage3.auction.co.kr/DetailView.aspx?ItemNo=B477612571&frm3=V2
 
-**UV-C LED **- Sub Body
+11550
 
-//  살균력이 가장 좋은 UV-C LED를 활용해 기기 내부에 저장되어있는 물을 항상 소독시킵니다.
+활성탄
+http://www.11st.co.kr/product/SellerProductDetail.tmall?method=getSellerProductDetail&prdNo=2272622540&gclid=Cj0KCQjwiILsBRCGARIsAHKQWLOPgWFg2zESBHGNiSgy9-wCPF0OblY-8dm_mRZMUYybHfBxM8M5WfUaAkfUEALw_wcB&utm_term=&utm_campaign=%B1%B8%B1%DB%BC%EE%C7%CEPC+%C3%DF%B0%A1%C0%DB%BE%F7&utm_source=%B1%B8%B1%DB_PC_S_%BC%EE%C7%CE&utm_medium=%B0%CB%BB%F6
 
+3500
 
+부직포
 
-**식물 생장 백색 LED** -Sub Body
 
-// 식물 광합성에 필요한 LED입니다.
+103800원
+아크릴 5~60000
 
 
 
-**투명 실리콘 호스**
+이산화탄소 측정 센서
+http://eduino.kr/product/detail.html?product_no=559&cate_no=34&display_group=2
 
-// 물을 이동시키는 호스입니다.
+공기 측정 센서
+http://eduino.kr/product/detail.html?product_no=578&cate_no=34&display_group=2
 
+2019.09.20(초안)
 
+<img width="436" alt="image" src="https://user-images.githubusercontent.com/11683617/232244705-eec2ca2a-5ba2-4fc0-a04e-9f75bf1e74da.png">
 
-**초음파 가습기 모듈** - Sub Body
 
-// 습도를 조절하기 위한 가습기 모듈입니다.
+이미지 5개의 레이어 층으로 구성
 
- 
+Layer 1 : HardWare (arduino, pi, etc)
+Layer 2 : Water Block
+Layer 3 : Filter
+Layer 4 : Terrarium
+Layer 5 : Module
 
-**12V 120mm FAN** - Sub Body
+/2019.10.05 *변경 : 모듈과 하드웨어를 통합*/
+Layer 1 : Water Block
+Layer 2 : Filter
+Layer 3 : Terrarium
+Layer 4 : Module + HardWare (arduino .etc)
 
-// 습도를 빠르게 낮추거나 테라리움 내부 공기 순환을 할 때 이용됩니다.
+2020.02.08
+내부 설계
 
+2020.07.29
 
+통신 - UART
 
-**DHT22 Sensor** - Main Body
+INPUT - Arduino D1 Wifi board
+WIFI를 활용해 OpenWeatherMap API를 통해 날씨정보 및 time.nist.gov의 시간 정보를 송신
+날씨 정보를 활용해 어떤 하드웨어를 작동시킬지 계산 후 OUTPUT으로 송신
 
-// 테라리움 내부의 온도와 습도를 측정하기 위한 센서입니다.
+OUTPUT - Arduino UNO (NANO)
+D1 Wifi board가 디지털 PWM을 미지원해서 UNO를 채용
+INPUT이 송신한 정보를 수신받아 하드웨어 동작
 
 
 
-**Water Sensor** - Sub Body
+2020.09.05
+Weather Condition Code를 정리하여 어떤 하드웨어를 작동시킬지의 여부를 정의함
 
-// Water Block의 물이 얼만큼 저장되어있는지 확인하기 위한 센서입니다.
-
-
-
-**여과지 & 부직포**
-
-// 흙을 거친 물을 다시 재활용하기 위해 불순물을 거르기 위한 여과지와 부직포입니다.
-
-
-
-**활성탄**
-
-// 흙을 거친 물을 정화시키기 위한 활성탄입니다.
-
-
-
-#### **부가적인 하드웨어**
-
-**CO² Sensor** - Main Body
-
-// 테라리움 내부의 이산화탄소 농도를 측정하기 위한 센서입니다.
-
-**공기 질 측정 센서(PM)** - Main Body
-
-// 외부 공기 질을 확인하기 위한 센서입니다.
+2020.09.18
+정리한 Weather Condition Code를 Switch-Case로 분류해 코드 작성
+이전 날씨 코드와 Refresh한 날씨코드를 비교해 같은 코드일 경우 AtmoCore를 거치지 않게 하여 작동 효율을 올림
