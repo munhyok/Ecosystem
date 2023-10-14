@@ -1,28 +1,29 @@
-#Project EcoSystem
+# #Project EcoSystem
 
-서론
-한정 된 공간에 지구의 날씨와 비슷한 환경에서 식물 성장 유지가 가능할까?
+# 서론
+**한정 된 공간에 지구의 날씨와 비슷한 환경에서 식물 성장 유지가 가능할까?**
 
-밖의 날씨를 실시간으로 테라리움 안에서 보여주는 것뿐만 아니라
+날씨 정보를 이용해 실시간으로 테라리움 안에서 보여주는 것뿐만 아니라
 밖의 날씨를 이용해 실제 식물을 사용자가 관리하지 않아도 스스로 성장이 가능할 수 있게 해주는 시스템
 
 식물 참고 : https://brunch.co.kr/@zzanggusis/8
 
-구현 범위
+
+# 구현 범위
 
 광합성, 습도(안개), 비 구현 예정
 
 난제
-가습기 살균 문제 (UV LED로 해결)
+가습기 살균 문제 (UV LED로 해결이 가능)
 모터 소음
 일회성 정수 필터
 
 Ex) 밖 : 비가온다 -> 테라리움 : 비가 내리듯이 물을 뿌려준다
 
 
-재료
+# 재료
 
-Main Body
+## Main Body
 OpenWeather API
 https://kocoafab.cc/tutorial/view/654
 https://randomnerdtutorials.com/esp8266-weather-forecaster/
@@ -104,7 +105,9 @@ http://eduino.kr/product/detail.html?product_no=559&cate_no=34&display_group=2
 공기 측정 센서
 http://eduino.kr/product/detail.html?product_no=578&cate_no=34&display_group=2
 
-2019.09.20(초안)
+-----
+
+## 2019.09.20(초안)
 
 <img width="436" alt="image" src="https://user-images.githubusercontent.com/11683617/232244705-eec2ca2a-5ba2-4fc0-a04e-9f75bf1e74da.png">
 
@@ -117,16 +120,16 @@ Layer 3 : Filter
 Layer 4 : Terrarium
 Layer 5 : Module
 
-/2019.10.05 *변경 : 모듈과 하드웨어를 통합*/
+### 2019.10.05 *변경 : 모듈과 하드웨어를 통합*/
 Layer 1 : Water Block
 Layer 2 : Filter
 Layer 3 : Terrarium
 Layer 4 : Module + HardWare (arduino .etc)
 
-2020.02.08
+### 2020.02.08
 내부 설계
 
-2020.07.29
+### 2020.07.29
 
 통신 - UART
 
@@ -140,9 +143,9 @@ INPUT이 송신한 정보를 수신받아 하드웨어 동작
 
 
 
-2020.09.05
+### 2020.09.05
 Weather Condition Code를 정리하여 어떤 하드웨어를 작동시킬지의 여부를 정의함
 
-2020.09.18
+### 2020.09.18
 정리한 Weather Condition Code를 Switch-Case로 분류해 코드 작성
 이전 날씨 코드와 Refresh한 날씨코드를 비교해 같은 코드일 경우 AtmoCore를 거치지 않게 하여 작동 효율을 올림
